@@ -1,0 +1,33 @@
+/*Logo*/
+.logo {
+  width: 70px;
+}
+
+.logoContent {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.logoContent p {
+  font-family: Montserrat;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.sidebar {
+  background-color: #e4f2ff;
+  height: 100%;
+  width: 15vw;
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.sidebar h3 {
+  font-family: Montserrat;
+  font-size: 16px;
+  font-weight: 400;
+}
