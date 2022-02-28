@@ -1,0 +1,68 @@
+/*Logo*/
+.logo {
+  width: 65px;
+  height: 65px;
+}
+
+.logoContent {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  background-color: #d0e8ff;
+  position: fixed;
+  top: 0;
+  padding: 15px;
+}
+
+.logoContent p {
+  font-family: Montserrat;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.logoContent:hover {
+  cursor: pointer;
+}
+
+.sidebar {
+  background-color: #d0e8ff;
+  height: 100%;
+  width: 16vw;
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow-y: scroll;
+}
+
+/* width */
+.sidebar::-webkit-scrollbar {
+  width: 8px;
+}
+
+/* Track */
+.sidebar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* Handle */
+.sidebar::-webkit-scrollbar-thumb {
+  background: rgba(156, 159, 167, 0.5);
+}
+
+.sidebar h2 {
+  font-family: Montserrat;
+  font-size: 16px;
+  font-weight: 400;
+}
+
+.sidebar .content {
+  margin-top: 90px;
+}
+
+.sidebar .section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}

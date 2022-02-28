@@ -14,13 +14,11 @@ export default function Home() {
     }
   }))
 
-  const { data: tools, error: toolsError } = useSWR('/api/tools', axios.get)
+  const { data: tools, error: toolsError } = useSWR('/api/tools', url => axios.get(url))
 
   if (cousesError || toolsError) return <div>failed to load</div>
-  if (!courses && !tools) return <div>loading...</div>
-
-  console.log("TOOLS")
-  console.log(tools)
+  if (!courses) return <div>loading...</div>
+  if (!tools) return <div>loading tools...</div>
 
   return (
     <>
