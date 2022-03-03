@@ -1,0 +1,29 @@
+.notificationsBar {
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 9999;
+  width: 600px;
+  padding: 20px 40px;
+  background-color: #e4f2ff;
+  overflow-y: scroll;
+}
+
+.notificationsBar h3 {
+  font-size: 15px;
+}
+
+/* width */
+.notificationsBar::-webkit-scrollbar {
+  width: 8px;
+}
+
+/* Track */
+.notificationsBar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* Handle */
+.notificationsBar::-webkit-scrollbar-thumb {
+  background: rgba(156, 159, 167, 0.5);
+}

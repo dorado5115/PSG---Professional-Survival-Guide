@@ -1,15 +1,15 @@
 import React from "react";
 import styles from "./styles/Sidebar.module.css";
-import stylesBox from "./styles/Box.module.css";
+import stylesBox from "./components/styles/Box.module.css";
 
-import Box from "./box";
+import { Box } from "./components";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import * as md from "react-icons/md";
 
 export default function Sidebar({ courses, tools }) {
-
-    console.log(tools);
-
+    const router = useRouter();
+    
     // make dictionary of categories and unique subcategories
     const categories = {};
     courses.forEach(course => {
@@ -33,10 +33,14 @@ export default function Sidebar({ courses, tools }) {
             }
         }
     });
+
+    const returnHome = () => {
+        router.push("/");
+    };
     
     return (
         <div className={styles.sidebar}>
-            <div className={styles.logoContent}>
+            <div className={styles.logoContent} onClick={returnHome}>
                 <img className={styles.logo} src="/logo_psg.png" alt="logo" />
                 <p>Professional Survival Guide</p>
             </div>
@@ -60,7 +64,7 @@ export default function Sidebar({ courses, tools }) {
                             <li>
                                 <md.MdInsertDriveFile />
                                 <Link href={`/contacto`}>
-                                    <a>Contactanos</a>
+                                    <a>Contáctanos</a>
                                 </Link>
                             </li>
                         </ul>

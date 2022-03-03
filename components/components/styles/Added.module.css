@@ -1,0 +1,36 @@
+.content {
+  display: flex;
+  flex-direction: row;
+  margin: 0 0 20px 0;
+  padding: 0;
+  cursor: pointer;
+}
+
+.text {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-left: 20px;
+}
+
+.text h4 {
+  font-size: 12px;
+  margin: 0;
+  padding: 0;
+  font-weight: 400;
+  font-family: poppins;
+}
+
+.text p {
+  font-size: 12px;
+  margin: 0;
+  padding: 0;
+  font-weight: 400;
+  font-family: poppins;
+  color: #9c9fa7;
+}
+
+.image {
+  border-radius: 20px;
+  margin-right: 20px;
+}
