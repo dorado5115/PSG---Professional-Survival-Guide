@@ -9,8 +9,13 @@ const handler = async (req, res) => {
         const courses = await Course.find().select('categoria subcategoria');
         res.json(courses);
     } else if (option == "all") {
-        const courses = await Course.find();
-        res.json(courses);
+        if (req.query.subcategory) {
+            const courses = await Course.find({ subcategoria: req.query.subcategory });
+            res.json(courses);
+        } else {
+            const courses = await Course.find();
+            res.json(courses);
+        }
     }
 };
 
