@@ -10,12 +10,12 @@ export default function Box({ title, children }) {
             <h3><strong>{title}</strong></h3>
             <ul>
                 {children.map(child => (
-                    <li>
-                        <md.MdInsertDriveFile />
-                        <Link href={`/courses?categoria=${title}&subcategoria=${child}`}>
+                    <Link href='/subcategory/[subcategory]' as={`/subcategory/${child}`}>
+                        <li>
+                            <md.MdInsertDriveFile />
                             <a>{child}</a>
-                        </Link>
-                    </li>
+                        </li>
+                    </Link>
                 ))}
             </ul>
         </div>
