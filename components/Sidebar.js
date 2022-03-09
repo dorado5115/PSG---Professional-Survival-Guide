@@ -43,6 +43,9 @@ export default function Sidebar({ courses, tools }) {
             }
         }
     });
+    
+    console.log("CATEGORIESTOOLSS");
+    console.log(categoriesTools);
 
     const returnHome = () => {
         router.push("/");
@@ -61,12 +64,12 @@ export default function Sidebar({ courses, tools }) {
                         <Box title={category} children={Object.values(categories[category].subcategories)} icon={Object.values(categories[category].icon)} />
                     ))}
                 </div>
-                {/* <div className={styles.section}>
+                <div className={styles.section}>
                     <h2>Herramientas</h2>
                     {Object.keys(categoriesTools).map(category => (
-                        <Box title={category} children={Object.values(categoriesTools[category])} icon={Object.values(categoriesTools[category].icon)} />
+                        <Box title={category} children={Object.values(categoriesTools[category].subcategories)} icon={Object.values(categoriesTools[category].icon)} />
                     ))}
-                </div> */}
+                </div>
                 <div className={styles.section}>
                     <h2>Contacto</h2>
                     <div className={stylesBox.box}>

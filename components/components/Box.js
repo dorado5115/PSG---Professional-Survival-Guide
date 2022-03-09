@@ -16,8 +16,6 @@ export default function Box({ title, children, icon }) {
     
     for (let i = 0; i < children.length; i++) {
         list.push([children[i], icon[i]]);
-        console.log(i);
-        console.log(list);
     }
 
     console.log("LIST");
