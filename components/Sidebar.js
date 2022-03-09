@@ -10,26 +10,36 @@ import * as md from "react-icons/md";
 export default function Sidebar({ courses, tools }) {
     const router = useRouter();
     
-    // make dictionary of categories and unique subcategories
+    // make dictionary of categories and unique subcategories with their icons
     const categories = {};
     courses.forEach(course => {
-        if (!categories[course.categoria]) {
-            categories[course.categoria] = [course.subcategoria];
+        if (!categories[course.category]) {
+            categories[course.category] = {
+                icon: [course.icon],
+                subcategories: [course.subcategory]
+            };
         } else {
-            if (!categories[course.categoria].includes(course.subcategoria)) {
-                categories[course.categoria].push(course.subcategoria);
+            if (!categories[course.category].subcategories.includes(course.subcategory)) {
+                categories[course.category].subcategories.push(course.subcategory);
+                categories[course.category].icon.push(course.icon);
             }
         }
     });
-
+    
+    console.log("CATEGORIES");
+    console.log(categories);
     // make dictionary of categories and unique subcategories of tools
     const categoriesTools = {};
     tools.forEach(tool => {
-        if (!categoriesTools[tool.categoria]) {
-            categoriesTools[tool.categoria] = [tool.subcategoria];
+        if (!categoriesTools[tool.category]) {
+            categoriesTools[tool.category] = {
+                subcategories: [tool.subcategory],
+                icon: [tool.icon]
+            };
         } else {
-            if (!categoriesTools[tool.categoria].includes(tool.subcategoria)) {
-                categoriesTools[tool.categoria].push(tool.subcategoria);
+            if (!categoriesTools[tool.category].subcategories.includes(tool.subcategory)) {
+                categoriesTools[tool.category].subcategories.push(tool.subcategory);
+                categoriesTools[tool.category].icon.push(tool.icon);
             }
         }
     });
@@ -48,21 +58,21 @@ export default function Sidebar({ courses, tools }) {
                 <div className={styles.section}>
                     <h2>Cursos</h2>
                     {Object.keys(categories).map(category => (
-                        <Box title={category} children={Object.values(categories[category])} />
+                        <Box title={category} children={Object.values(categories[category].subcategories)} icon={Object.values(categories[category].icon)} />
                     ))}
                 </div>
-                <div className={styles.section}>
+                {/* <div className={styles.section}>
                     <h2>Herramientas</h2>
                     {Object.keys(categoriesTools).map(category => (
-                        <Box title={category} children={Object.values(categoriesTools[category])} />
+                        <Box title={category} children={Object.values(categoriesTools[category])} icon={Object.values(categoriesTools[category].icon)} />
                     ))}
-                </div>
+                </div> */}
                 <div className={styles.section}>
                     <h2>Contacto</h2>
                     <div className={stylesBox.box}>
                         <ul>
                             <li>
-                                <md.MdInsertDriveFile />
+                                <md.MdPhone />
                                 <Link href={`/contacto`}>
                                     <a>Contáctanos</a>
                                 </Link>

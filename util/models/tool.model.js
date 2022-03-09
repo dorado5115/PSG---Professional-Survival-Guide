@@ -2,18 +2,26 @@ const { default: mongoose } = require('mongoose');
 const { Schema, model } = require('mongoose');
 
 const tool = new Schema({
-    categoria: {
+    category: {
         type: String,
         required: true
     },
-    titulo: {
+    subcategory: {
         type: String,
         required: true
     },
-    descripcion: {
+    title: {
         type: String,
         required: true
     },
+    description: {
+        type: String,
+        required: true
+    },
+    icon: {
+        type: String,
+        required: true
+    }
 },
 {
     timestamps: true,
@@ -23,5 +31,4 @@ const tool = new Schema({
 mongoose.models = {};
 
 var Tool = model('Tool', tool);
-
 export default Tool;

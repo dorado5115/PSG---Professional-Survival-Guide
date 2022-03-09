@@ -2,15 +2,11 @@ const { default: mongoose } = require('mongoose');
 const { Schema, model } = require('mongoose');
 
 const course = new Schema({
-    categoria: {
+    category: {
         type: String,
         required: true
     },
-    subcategoria: {
-        type: String,
-        required: true
-    },
-    titulo: {
+    subcategory: {
         type: String,
         required: true
     },
@@ -18,6 +14,14 @@ const course = new Schema({
         type: String,
         required: true
     },
+    title: {
+        type: String,
+        required: true
+    },
+    icon: {
+        type: String,
+        required: true
+    }
 },
 {
     timestamps: true,
