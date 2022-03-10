@@ -6,19 +6,8 @@ const handler = async (req, res) => {
     const { option } = req.query;
 
     if (req.method === 'GET') {
-
-        if (option == "sidebar") {
-            const courses = await Course.find().select('category subcategory icon');
-            res.json(courses);
-        } else if (option == "all") {
-            if (req.query.subcategory) {
-                const courses = await Course.find({ subcategory: req.query.subcategory });
-                res.json(courses);
-            } else {
-                const courses = await Course.find();
-                res.json(courses);
-            }
-        }
+        const courses = await Course.find().select('category subcategory icon');
+        res.json(courses);
     } else if (req.method === 'POST') {
         // create a new course
         const newCourse = new Course(req.body);

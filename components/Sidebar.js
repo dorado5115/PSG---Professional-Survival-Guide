@@ -26,8 +26,6 @@ export default function Sidebar({ courses, tools }) {
         }
     });
     
-    console.log("CATEGORIES");
-    console.log(categories);
     // make dictionary of categories and unique subcategories of tools
     const categoriesTools = {};
     tools.forEach(tool => {
@@ -44,9 +42,6 @@ export default function Sidebar({ courses, tools }) {
         }
     });
     
-    console.log("CATEGORIESTOOLSS");
-    console.log(categoriesTools);
-
     const returnHome = () => {
         router.push("/");
     };
@@ -61,13 +56,21 @@ export default function Sidebar({ courses, tools }) {
                 <div className={styles.section}>
                     <h2>Cursos</h2>
                     {Object.keys(categories).map(category => (
-                        <Box title={category} children={Object.values(categories[category].subcategories)} icon={Object.values(categories[category].icon)} />
+                        <Box 
+                            title={category} 
+                            children={Object.values(categories[category].subcategories)} 
+                            icon={Object.values(categories[category].icon)} 
+                        />
                     ))}
                 </div>
                 <div className={styles.section}>
                     <h2>Herramientas</h2>
                     {Object.keys(categoriesTools).map(category => (
-                        <Box title={category} children={Object.values(categoriesTools[category].subcategories)} icon={Object.values(categoriesTools[category].icon)} />
+                        <Box 
+                            title={category} 
+                            children={Object.values(categoriesTools[category].subcategories)} 
+                            icon={Object.values(categoriesTools[category].icon)} 
+                        />
                     ))}
                 </div>
                 <div className={styles.section}>
@@ -75,7 +78,7 @@ export default function Sidebar({ courses, tools }) {
                     <div className={stylesBox.box}>
                         <ul>
                             <li>
-                                <md.MdPhone />
+                                <md.MdEmail/>
                                 <Link href={`/contacto`}>
                                     <a>Contáctanos</a>
                                 </Link>

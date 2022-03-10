@@ -1,0 +1,23 @@
+.content {
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  overflow-y: scroll;
+  padding: 40px;
+}
+
+/* width */
+.content::-webkit-scrollbar {
+  width: 8px;
+}
+
+/* Track */
+.content::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* Handle */
+.content::-webkit-scrollbar-thumb {
+  background: rgba(156, 159, 167, 0.5);
+}

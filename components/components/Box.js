@@ -1,7 +1,6 @@
 import Link from "next/link";
 import React from "react";
 import * as MaterialDesign from "react-icons/md";
-import * as FontAwesome from "react-icons/fa";
 import styles from "./styles/Box.module.css";
 
 export default function Box({ title, children, icon }) {
@@ -17,9 +16,6 @@ export default function Box({ title, children, icon }) {
     for (let i = 0; i < children.length; i++) {
         list.push([children[i], icon[i]]);
     }
-
-    console.log("LIST");
-    console.log(list);
     
     return(
         <div className={styles.box}>

@@ -5,12 +5,7 @@ import styles from "../styles/Home.module.css";
 import { Sidebar, Content, NotificationsBar } from '../components'
 
 export default function Home() {
-  const { data: courses, error: cousesError } = useSWR('/api/courses', url => axios.get(url, {
-    params: {
-      option: "sidebar"
-    }
-  }));
-
+  const { data: courses, error: cousesError } = useSWR('/api/courses', url => axios.get(url));
   const { data: tools, error: toolsError } = useSWR('/api/tools', url => axios.get(url))
 
   if (cousesError || toolsError) return <div>failed to load</div>
