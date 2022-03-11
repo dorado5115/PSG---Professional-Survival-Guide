@@ -16,18 +16,21 @@ export default function SubcategoryCourses() {
         }
     }));
 
+    const { data: recentlyAdded, error: recentlyAddedError } = useSWR('/api/coursesByDate', url => axios.get(url));
+
     // Sidebar tools
     const { data: tools, error: toolsError } = useSWR('/api/tools', url => axios.get(url))
 
-    if (cousesError || toolsError) return <div>failed to load</div>
+    if (cousesError || toolsError || recentlyAddedError) return <div>failed to load</div>
     if (!courses) return <div><p>loading...</p></div>
+    if (!recentlyAdded) return <div><p>loading secrets...</p></div>
     if (!tools) return <div><p>loading tools...</p></div>
 
     return (
         <div className={styles.page}>
           <Sidebar courses={courses.data} tools={tools.data}/>
           <CoursesContent subcategoryId={subcategoryId} />
-          <NotificationsBar />
+          <NotificationsBar data={recentlyAdded.data}/>
         </div>
     )
 }

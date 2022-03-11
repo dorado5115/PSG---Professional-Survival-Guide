@@ -30,7 +30,7 @@ export default function CoursesContent({ subcategoryId }) {
     return (
         <div className={styles.content}>
             <Box sx={{ with: '100%' }}>
-                <Grid container spacing={{ xs: 2, md: 5 }} columns={{ xs: 1, sm: 4, md: 8, lg: 12 }}>
+                <Grid container spacing={{ xs: 2, md: 5 }} rowSpacing={{xs: 1}} columns={{ xs: 1, sm: 4, md: 8, lg: 12 }}>
                     {coursesContent.data.map(course => (
                         <Grid item xs={2} sm={4} md={4} key={course._id}>
                             <Course key={course._id} title={course.title} link={course.link} image={images[Math.floor(Math.random() * images.length)]}/>
