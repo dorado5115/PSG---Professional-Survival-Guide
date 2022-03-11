@@ -64,7 +64,7 @@ export default function Sidebar({ courses, tools }) {
                     ))}
                 </div>
                 <div className={styles.section}>
-                    <h2>Herramientas</h2>
+                    <h2>Otros</h2>
                     {Object.keys(categoriesTools).map(category => (
                         <Box 
                             title={category} 

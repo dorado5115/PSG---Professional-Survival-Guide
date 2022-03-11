@@ -7,9 +7,8 @@ import styles from "./styles/Box.module.css";
 
 export default function Box({ title, children, icon }) {
     const router = useRouter();
-
-    // check if in the url there is the category
-    const isActive = router.pathname.includes(title);
+        
+    // TODO active link
 
     const Icon = props => {
         const { iconName, size, color } = props;

@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router';
-import { Sidebar, CoursesContent, NotificationsBar } from '../../components'
+import { Sidebar, CoursesContent, NotificationsBar, ToolsContent } from '../../components'
 import styles from "../../styles/Home.module.css";
 
 import useSWR from 'swr'
@@ -28,9 +28,13 @@ export default function SubcategoryCourses() {
 
     return (
         <div className={styles.page}>
-          <Sidebar courses={courses.data} tools={tools.data}/>
-          <CoursesContent subcategoryId={subcategoryId} />
-          <NotificationsBar data={recentlyAdded.data}/>
+            <Sidebar courses={courses.data} tools={tools.data}/>
+            {subcategoryId == "Herramientas Tecmilenio" ? (
+                <ToolsContent subcategoryId={subcategoryId}/>
+            ) : (
+                <CoursesContent subcategoryId={subcategoryId}/>
+            )}
+            <NotificationsBar data={recentlyAdded.data}/>
         </div>
     )
 }
