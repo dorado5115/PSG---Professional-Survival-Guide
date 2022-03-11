@@ -1,9 +1,16 @@
 import Link from "next/link";
 import React from "react";
+import { useRouter } from "next/router";
+
 import * as MaterialDesign from "react-icons/md";
 import styles from "./styles/Box.module.css";
 
 export default function Box({ title, children, icon }) {
+    const router = useRouter();
+
+    // check if in the url there is the category
+    const isActive = router.pathname.includes(title);
+
     const Icon = props => {
         const { iconName, size, color } = props;
         const icon = React.createElement(MaterialDesign[iconName]);

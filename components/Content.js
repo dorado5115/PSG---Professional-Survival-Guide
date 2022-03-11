@@ -5,12 +5,7 @@ import styles from "./styles/Content.module.css";
 export default function Content() {
   return (
         <div className={styles.content}>   
-            <Image
-                src="/bcSalmon.svg"
-                alt="salmon"
-                width={724}
-                height={150}
-            />
+            <img src="/fondo_naranja.svg" alt="salmon" />
             <div className={styles.frontTitle}>
                 <h1>Orgullo <strong>Latinoamericano</strong></h1>
                 <p>
@@ -35,12 +30,7 @@ export default function Content() {
                     </div>
                 </div>
                 <div>
-                <Image
-                    src="/mexicanandlomito.svg"
-                    alt="mexican and lomito"
-                    width={250}
-                    height={369}
-                />
+                    <img src="/mexicanandlomito.svg" alt="mexican and lomito" className={styles.mexicanAndLomito} />
                 </div>
             </div>
         </div>
