@@ -1,20 +1,21 @@
 import Image from "next/image";
 import styles from "./styles/Added.module.css"
 
-export default function Added() {
+export default function Added({ title, subcategory, link, image }) {
     return (
-        <div className={styles.content}>
-            <Image 
-                src="/blue.svg"
+        <a className={styles.content} href={link} target="_blank">
+            {/* <Image 
+                src={image}
                 alt="Added"
                 className={styles.image}
-                width={150}
-                height={150}
-            />
+                width={180}
+                height={180}
+            /> */}
+            <img src={image} alt={title} className={styles.image} />
             <div className={styles.text}>
-                <h4>JavaScript Execution Context - How JS Works Behind The Scenes</h4>
-                <p>Diferentes Áreas</p>
+                <h4>{title}</h4>
+                <p>{subcategory}</p>
             </div>
-        </div>
+        </a>
     );
 }
