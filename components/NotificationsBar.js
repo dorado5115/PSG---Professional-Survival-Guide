@@ -12,6 +12,9 @@ export default function NotificationsBar({ data }) {
         "/salmon.svg",
     ]
 
+    // parse the data
+    data = JSON.parse(data);
+
     //filter out the courses by the last month
     var filteredData = data.filter(course => {
         var date = new Date(course.createdAt);

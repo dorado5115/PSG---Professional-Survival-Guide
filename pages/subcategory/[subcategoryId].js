@@ -1,40 +1,48 @@
 import { useRouter } from 'next/router';
 import { Sidebar, CoursesContent, NotificationsBar, ToolsContent } from '../../components'
 import styles from "../../styles/Home.module.css";
+import mongoose from 'mongoose';
+import Course from '../../util/models/course.model';
+import Tool from '../../util/models/tool.model';
 
 import useSWR from 'swr'
 import axios from 'axios'
 
-export default function SubcategoryCourses() {
+export default function SubcategoryCourses(props) {
     const router = useRouter();
-    const { subcategoryId } = router.query;
-
-    // Sidebar Courses
-    const { data: courses, error: cousesError } = useSWR('/api/courses', url => axios.get(url, {
-        params: {
-            option: "sidebar",
-        }
-    }));
-
-    const { data: recentlyAdded, error: recentlyAddedError } = useSWR('/api/coursesByDate', url => axios.get(url));
-
-    // Sidebar tools
-    const { data: tools, error: toolsError } = useSWR('/api/tools', url => axios.get(url))
-
-    if (cousesError || toolsError || recentlyAddedError) return <div>failed to load</div>
-    if (!courses) return <div><p>loading...</p></div>
-    if (!recentlyAdded) return <div><p>loading secrets...</p></div>
-    if (!tools) return <div><p>loading tools...</p></div>
-
+    
     return (
         <div className={styles.page}>
-            <Sidebar courses={courses.data} tools={tools.data}/>
-            {subcategoryId == "Herramientas Tecmilenio" ? (
-                <ToolsContent subcategoryId={subcategoryId}/>
+            <Sidebar courses={props.courses} tools={props.tools}/>
+            {props.subcategoryId == "Herramientas Tecmilenio" ? (
+                <ToolsContent subcategoryId={props.subcategoryId}/>
             ) : (
-                <CoursesContent subcategoryId={subcategoryId}/>
+                <CoursesContent subcategoryId={props.subcategoryId}/>
             )}
-            <NotificationsBar data={recentlyAdded.data}/>
+            <NotificationsBar data={props.recentlyAdded}/>
         </div>
     )
+}
+
+export async function getServerSideProps(context) {
+    const { subcategoryId } = context.query;
+
+    if (mongoose.connection.readyState === 0) {
+        await mongoose.connect(process.env.MONGO_URL, {
+            useUnifiedTopology: true,
+            useNewUrlParser: true
+        })
+    }
+    const courses = await Course.find().select('category subcategory icon');
+    const recentlyAdded = await Course.find().select('_id subcategory title link createdAt');
+    const tools = await Tool.find();
+
+    return {
+        props: {
+            courses: JSON.stringify(courses),
+            recentlyAdded: JSON.stringify(recentlyAdded),
+            tools: JSON.stringify(tools),
+            subcategoryId: subcategoryId
+        }
+    }
 }

@@ -9,7 +9,11 @@ import * as md from "react-icons/md";
 
 export default function Sidebar({ courses, tools }) {
     const router = useRouter();
-    
+
+    // parse the courses and tools data
+    courses = JSON.parse(courses);
+    tools = JSON.parse(tools);
+        
     // make dictionary of categories and unique subcategories with their icons
     const categories = {};
     courses.forEach(course => {
