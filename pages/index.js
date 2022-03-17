@@ -1,27 +1,38 @@
-import useSWR from 'swr'
-import axios from 'axios'
+import mongoose from 'mongoose';
+import Course from '../util/models/course.model';
+import Tool from '../util/models/tool.model';
 
 import styles from "../styles/Home.module.css";
 import { Sidebar, Content, NotificationsBar } from '../components'
 
-export default function Home() {
-  const { data: courses, error: cousesError } = useSWR('/api/courses', url => axios.get(url));
-  const { data: recentlyAdded, error: recentlyAddedError } = useSWR('/api/coursesByDate', url => axios.get(url));
-  const { data: tools, error: toolsError } = useSWR('/api/tools', url => axios.get(url))
-
-  if (cousesError || toolsError || recentlyAddedError) return <div>failed to load</div>
-  if (!courses) return <div><p>loading...</p></div>
-  if (!recentlyAdded) return <div><p>loading secrets...</p></div>
-  if (!tools) return <div><p>loading tools...</p></div>
-
-  
+export default function Home(props) { 
   return (
     <>
         <div className={styles.page}>
-          <Sidebar courses={courses.data} tools={tools.data}/>
+          <Sidebar courses={props.courses} tools={props.tools}/>
           <Content />
-          <NotificationsBar data={recentlyAdded.data}/>
+          <NotificationsBar data={props.recentlyAdded}/>
         </div>
     </>
   )
+}
+
+export async function getServerSideProps() {
+  if (mongoose.connection.readyState === 0) {
+      await mongoose.connect(process.env.MONGO_URL, {
+          useUnifiedTopology: true,
+          useNewUrlParser: true
+      })
+  }
+  const courses = await Course.find().select('category subcategory icon');
+  const recentlyAdded = await Course.find().select('_id subcategory title link createdAt');
+  const tools = await Tool.find();
+  
+  return {
+      props: {
+        courses: JSON.stringify(courses),
+        recentlyAdded: JSON.stringify(recentlyAdded),
+        tools: JSON.stringify(tools)
+      }
+  }
 }
