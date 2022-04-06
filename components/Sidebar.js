@@ -1,4 +1,4 @@
-import React from "react";
+
 import styles from "./styles/Sidebar.module.css";
 import stylesBox from "./components/styles/Box.module.css";
 
@@ -9,11 +9,7 @@ import * as md from "react-icons/md";
 
 export default function Sidebar({ courses, tools }) {
     const router = useRouter();
-
-    // parse the courses and tools data
-    courses = JSON.parse(courses);
-    tools = JSON.parse(tools);
-        
+    
     // make dictionary of categories and unique subcategories with their icons
     const categories = {};
     courses.forEach(course => {
@@ -49,7 +45,8 @@ export default function Sidebar({ courses, tools }) {
     const returnHome = () => {
         router.push("/");
     };
-    
+
+
     return (
         <div className={styles.sidebar}>
             <div className={styles.logoContent} onClick={returnHome}>
@@ -83,7 +80,7 @@ export default function Sidebar({ courses, tools }) {
                         <ul>
                             <li>
                                 <md.MdEmail/>
-                                <Link href={`/contacto`}>
+                                <Link href={`/?subcategory=contacto`}>
                                     <a>Contáctanos</a>
                                 </Link>
                             </li>

@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import Link from "next/link";
 import React from "react";
 import { useRouter } from "next/router";
@@ -7,9 +8,12 @@ import styles from "./styles/Box.module.css";
 
 export default function Box({ title, children, icon }) {
     const router = useRouter();
-        
-    // TODO active link
+    var subcategoryId = router.query.subcategory;
 
+    useEffect(() => {
+        subcategoryId = router.query;
+    }, [router.query.subcategoryId]);
+        
     const Icon = props => {
         const { iconName, size, color } = props;
         const icon = React.createElement(MaterialDesign[iconName]);
@@ -28,8 +32,8 @@ export default function Box({ title, children, icon }) {
             <h3><strong>{title}</strong></h3>
             <ul>
                 {children.map(child => (
-                    <Link href='/subcategory/[subcategory]' as={`/subcategory/${child}`}>
-                        <li>
+                   <Link href={`/?subcategory=${child}`}>
+                        <li className={child == subcategoryId ? styles.active : ""}>
                             <Icon iconName={icon[children.indexOf(child)]} />
                             <a>{child}</a>
                         </li>

@@ -1,38 +1,41 @@
-import mongoose from 'mongoose';
-import Course from '../util/models/course.model';
-import Tool from '../util/models/tool.model';
+import useSWR from 'swr'
+import axios from 'axios'
 
 import styles from "../styles/Home.module.css";
 import { Sidebar, Content, NotificationsBar } from '../components'
 
-export default function Home(props) { 
+import Backdrop from '@mui/material/Backdrop';
+import CircularProgress from '@mui/material/CircularProgress';
+
+export default function Home() { 
+  const { data: courses, error: coursesError } = useSWR('/api/courses', axios.get);
+  const { data: tools, error: toolsError } = useSWR('/api/tools', axios.get);
+  const { data: recentlyAdded, error: recentlyAddedError } = useSWR('/api/coursesByDate', axios.get);
+
+  if (coursesError || toolsError || recentlyAddedError) {
+    return <div>failed to load courses</div>
+  }
+
+  if (!courses || !tools || !recentlyAdded) {
+      return (
+          <>
+              <Backdrop
+                  sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+                  open={true}
+              >
+                  <CircularProgress color="inherit" />
+              </Backdrop>
+          </>
+      )
+  }
+
   return (
     <>
         <div className={styles.page}>
-          <Sidebar courses={props.courses} tools={props.tools}/>
+          <Sidebar courses={courses.data} tools={tools.data}/>
           <Content />
-          <NotificationsBar data={props.recentlyAdded}/>
+          <NotificationsBar data={recentlyAdded.data}/>
         </div>
     </>
   )
-}
-
-export async function getServerSideProps() {
-  if (mongoose.connection.readyState === 0) {
-      await mongoose.connect(process.env.MONGO_URL, {
-          useUnifiedTopology: true,
-          useNewUrlParser: true
-      })
-  }
-  const courses = await Course.find().select('category subcategory icon');
-  const recentlyAdded = await Course.find().select('_id subcategory title link createdAt');
-  const tools = await Tool.find();
-  
-  return {
-      props: {
-        courses: JSON.stringify(courses),
-        recentlyAdded: JSON.stringify(recentlyAdded),
-        tools: JSON.stringify(tools)
-      }
-  }
 }
