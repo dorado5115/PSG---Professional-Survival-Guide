@@ -1,6 +1,7 @@
 import '../styles/globals.css'
 import Head from 'next/head'
-import {SnackbarProvider } from 'notistack';
+import { UserProvider } from '@auth0/nextjs-auth0';
+import { SnackbarProvider } from 'notistack';
 
 const connectDB = require("../util/connection");
 
@@ -13,7 +14,9 @@ function MyApp({ Component, pageProps }) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <SnackbarProvider maxSnack={3}>
-        <Component {...pageProps} />
+        <UserProvider>
+          <Component {...pageProps} />
+        </UserProvider>
       </SnackbarProvider>
     </>
   )

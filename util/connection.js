@@ -8,7 +8,8 @@ const connectDB = handler => async (req, res) => {
     // Use new db connection
     await mongoose.connect(process.env.MONGO_URL, {
       useUnifiedTopology: true,
-      useNewUrlParser: true
+      useNewUrlParser: true,
+      ssl: true,
     }).then(() => {
       console.log('MongoDB Connected');
     }).catch(err => {

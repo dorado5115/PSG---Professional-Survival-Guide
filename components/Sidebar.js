@@ -56,20 +56,22 @@ export default function Sidebar({ courses, tools }) {
             <div className={styles.content}>
                 <div className={styles.section}>
                     <h2>Cursos</h2>
-                    {Object.keys(categories).map(category => (
+                    {Object.keys(categories).map((category, index) => (
                         <Box 
+                            key={index}
                             title={category} 
-                            children={Object.values(categories[category].subcategories)} 
+                            data={Object.values(categories[category].subcategories)} 
                             icon={Object.values(categories[category].icon)} 
                         />
                     ))}
                 </div>
                 <div className={styles.section}>
                     <h2>Otros</h2>
-                    {Object.keys(categoriesTools).map(category => (
+                    {Object.keys(categoriesTools).map((category, index) => (
                         <Box 
+                            key={index}
                             title={category} 
-                            children={Object.values(categoriesTools[category].subcategories)} 
+                            data={Object.values(categoriesTools[category].subcategories)} 
                             icon={Object.values(categoriesTools[category].icon)} 
                         />
                     ))}

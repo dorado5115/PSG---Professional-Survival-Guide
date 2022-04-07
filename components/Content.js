@@ -20,6 +20,10 @@ export default function Content() {
     // Courses
     const { data: courses, error: coursesError } = useSWR('/api/courses', axios.get);
 
+    useEffect(() => {
+        subcategoryId = router.query;
+    }, [router.query.subcategoryId]);
+    
     if (coursesError) return <div>failed to load</div>
     if (!courses) return <div><p>loading...</p></div>
     
@@ -31,9 +35,6 @@ export default function Content() {
         "/salmon.svg",
     ]
 
-    useEffect(() => {
-        subcategoryId = router.query;
-    }, [router.query.subcategoryId]);
     
     if (subcategoryId == "Herramientas Tecmilenio") {
         return (
@@ -41,13 +42,13 @@ export default function Content() {
                 <ToolsContent subcategoryId={subcategoryId}/>
             </div>
         )
-    } else if (subcategoryId) {
+    } else if (subcategoryId != "contacto" && subcategoryId != undefined) {
         return (
             <div className={styles.content}>
                 <Box sx={{ with: '100%', height: '100%' }}>
                     <Grid container spacing={{ xs: 2, md: 5 }} rowSpacing={{xs: 4}} columns={{ xs: 1, sm: 4, md: 8, lg: 12 }}>
                         {courses.data.filter(course => course.subcategory == subcategoryId).map(course => (
-                            <Fade in={true}>
+                            <Fade in={true} key={course._id}>
                                 <Grid item xs={2} sm={4} md={4} key={course._id}>
                                     <Course
                                         key={course._id}
@@ -69,38 +70,40 @@ export default function Content() {
                 <Contact/>
             </div>
         )
-    }else {
-        return (
-            <div className={styles.content}>   
+    }
+
+    return (
+        <div className={styles.content}> 
+            <div className={styles.bc}>
                 <img src="/fondo_naranja.svg" alt="salmon" />
-                <div className={styles.frontTitle}>
-                    <h1>Orgullo <strong>Latinoamericano</strong></h1>
-                    <p>
-                        Somos estudiantes <b>como tu</b>, queremos que
-                        salgas adelante y tengas la oportunidad
-                        de poder <b>elegir lo que te apasiona</b>.
-                    </p>
-                </div>
-                <div className={styles.contentPhrases}>
-                    <div className={styles.phrases}>
-                        <div>
-                            <h2>“Aprende <strong>cada día</strong> y estarás bien”</h2>
-                            <p>
-                                -Freddy Vega (CEO de Platzi)
-                            </p>
-                        </div>
-                        <div>
-                            <h2>“Yo nunca me sentí mas acabado y viejo que a los 20s(...)<strong>Tienen un chingo de tiempo”</strong></h2>
-                            <p>
-                                -Guillermo del Toro (ha de oler a jokeis)
-                            </p>
-                        </div>
+            </div>  
+            <div className={styles.frontTitle}>
+                <h1>Orgullo <strong>Latinoamericano</strong></h1>
+                <p>
+                    Somos estudiantes <b>como tu</b>, queremos que
+                    salgas adelante y tengas la oportunidad
+                    de poder <b>elegir lo que te apasiona</b>.
+                </p>
+            </div>
+            <div className={styles.contentPhrases}>
+                <div className={styles.phrases}>
+                    <div>
+                        <h2>“Aprende <strong>cada día</strong> y estarás bien”</h2>
+                        <p>
+                            -Freddy Vega (CEO de Platzi)
+                        </p>
                     </div>
                     <div>
-                        <img src="/mexicanandlomito.svg" alt="mexican and lomito" className={styles.mexicanAndLomito} />
+                        <h2>“Yo nunca me sentí mas acabado y viejo que a los 20s(...)<strong>Tienen un chingo de tiempo”</strong></h2>
+                        <p>
+                            -Guillermo del Toro (ha de oler a jokeis)
+                        </p>
                     </div>
                 </div>
+                <div>
+                    <img src="/mexicanandlomito.svg" alt="mexican and lomito" className={styles.mexicanAndLomito} />
+                </div>
             </div>
-        )
-    }
+        </div>
+    )
 }
