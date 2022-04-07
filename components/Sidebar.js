@@ -80,12 +80,12 @@ export default function Sidebar({ courses, tools }) {
                     <h2>Contacto</h2>
                     <div className={stylesBox.box}>
                         <ul>
-                            <li>
-                                <md.MdEmail/>
-                                <Link href={`/?subcategory=contacto`}>
+                            <Link href={`/?subcategory=contacto`} passHref>
+                                <li>
+                                    <md.MdEmail/>
                                     <a>Contáctanos</a>
-                                </Link>
-                            </li>
+                                </li>
+                            </Link>
                         </ul>
                     </div>
                 </div>

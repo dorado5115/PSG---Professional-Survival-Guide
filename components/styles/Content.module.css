@@ -43,7 +43,7 @@
   width: 28vw;
 }
 
-.content strong {
+.content .frontTitle strong, .content .contentPhrases strong {
   color: #ffa87d;
 }
 
