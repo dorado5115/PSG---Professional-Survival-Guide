@@ -1,5 +1,6 @@
 import { useEffect } from 'react'
 import { useRouter } from 'next/router'
+import Image from 'next/image';
 
 import React from "react";
 import styles from "./styles/Content.module.css";
@@ -101,7 +102,12 @@ export default function Content() {
                     </div>
                 </div>
                 <div>
-                    <img src="/mexicanandlomito.svg" alt="mexican and lomito" className={styles.mexicanAndLomito} />
+                    <Image
+                        src="/mexicanandlomito.svg"
+                        alt="mexican and lomito"
+                        width={250}
+                        height={369}
+                    />
                 </div>
             </div>
         </div>
