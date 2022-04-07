@@ -36,6 +36,8 @@ export default function Content() {
         "/salmon.svg",
     ]
 
+    var mexican = "/mexicanandlomito.svg";
+
     
     if (subcategoryId == "Herramientas Tecmilenio") {
         return (
@@ -103,7 +105,7 @@ export default function Content() {
                 </div>
                 <div>
                     <Image
-                        src="/mexicanandlomito.svg"
+                        src={mexican}
                         alt="mexican and lomito"
                         width={250}
                         height={369}
