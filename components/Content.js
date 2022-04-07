@@ -104,12 +104,7 @@ export default function Content() {
                     </div>
                 </div>
                 <div>
-                    <Image
-                        src={mexican}
-                        alt="mexican and lomito"
-                        width={250}
-                        height={369}
-                    />
+                    <img src="https://drive.google.com/uc?export=view&id=1gUClTmhXWY56Ig9Bm6HHf3FFZ7uer28e" alt="mexican and lomito" />
                 </div>
             </div>
         </div>
