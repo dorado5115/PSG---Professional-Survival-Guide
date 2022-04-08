@@ -1,14 +1,20 @@
+import Link from "next/link";
+import { useEffect } from "react";
+import { useRouter } from "next/router";
 
 import styles from "./styles/Sidebar.module.css";
 import stylesBox from "./components/styles/Box.module.css";
 
 import { Box } from "./components";
-import Link from "next/link";
-import { useRouter } from "next/router";
 import * as md from "react-icons/md";
 
 export default function Sidebar({ courses, tools }) {
     const router = useRouter();
+    var subcategoryId = router.query.subcategory;
+
+    useEffect(() => {
+        subcategoryId = router.query;
+    }, [router.query.subcategoryId]);
     
     // make dictionary of categories and unique subcategories with their icons
     const categories = {};
@@ -81,7 +87,7 @@ export default function Sidebar({ courses, tools }) {
                     <div className={stylesBox.box}>
                         <ul>
                             <Link href={`/?subcategory=contacto`} passHref>
-                                <li>
+                                <li className={subcategoryId === "contacto" ? styles.active : ""}>
                                     <md.MdEmail/>
                                     <a>Contáctanos</a>
                                 </li>

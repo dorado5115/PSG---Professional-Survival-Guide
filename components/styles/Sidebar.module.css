@@ -66,3 +66,9 @@
   align-items: center;
   width: 100%;
 }
+
+.active {
+  color: #5DAEFE !important;; 
+  font-weight: bold;
+  border-left: 2px solid #5DAEFE;
+}

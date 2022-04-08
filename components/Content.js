@@ -35,9 +35,6 @@ export default function Content() {
         "/pink.svg",
         "/salmon.svg",
     ]
-
-    var mexican = "/mexicanandlomito.svg";
-
     
     if (subcategoryId == "Herramientas Tecmilenio") {
         return (
@@ -104,7 +101,8 @@ export default function Content() {
                     </div>
                 </div>
                 <div>
-                    <img src="https://drive.google.com/uc?export=view&id=1gUClTmhXWY56Ig9Bm6HHf3FFZ7uer28e" alt="mexican and lomito" />
+                    {/* <img src="https://drive.google.com/uc?export=view&id=1gUClTmhXWY56Ig9Bm6HHf3FFZ7uer28e" alt="mexican and lomito" /> */}
+                    <img src="/lomito.svg" alt="mexican and lomito" />
                 </div>
             </div>
         </div>
