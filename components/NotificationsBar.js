@@ -12,7 +12,6 @@ export default function NotificationsBar({ data }) {
         "/salmon.svg",
     ]
 
-    console.log(data);
     
     //filter out the courses by the last month
     var filteredData = data.filter(course => {
