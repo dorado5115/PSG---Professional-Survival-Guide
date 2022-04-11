@@ -11,6 +11,8 @@ export default function NotificationsBar({ data }) {
         "/pink.svg",
         "/salmon.svg",
     ]
+
+    console.log(data);
     
     //filter out the courses by the last month
     var filteredData = data.filter(course => {
@@ -20,10 +22,13 @@ export default function NotificationsBar({ data }) {
         return date > lastMonth;
     });
 
+    // change filtered data when page is ready
+    // TODO
+
     return (
         <div className={styles.notificationsBar}>
             <h3>Recientemente agregados</h3>
-            {filteredData.map(course => (
+            {data.map(course => (
                 <Added 
                     key={course._id} 
                     title={course.title} 
