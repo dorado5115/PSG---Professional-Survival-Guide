@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import useSWR from 'swr'
 import axios from 'axios'
 
@@ -10,6 +11,32 @@ import CircularProgress from '@mui/material/CircularProgress';
 import { useUser } from "@auth0/nextjs-auth0";
 import { useRouter } from "next/router";
 
+const createUser = async (email, name) => {
+  axios.get('/api/users', {
+    params: {
+      email,
+    }
+  })
+  .then(res => {
+    if (res.data.length === 0) {
+      axios.post('/api/users', {
+        email,
+        name,
+      })
+      .then(res => {
+        /* console.log(res); */
+      })
+      .catch(err => {
+        console.log(err);
+      })
+    }
+  })
+  .catch(err => {
+    console.log(err);
+  })
+}
+
+
 export default function Home() { 
   const { user, error, isLoading } = useUser();
   const router = useRouter();
@@ -17,16 +44,22 @@ export default function Home() {
   const { data: courses, error: coursesError } = useSWR('/api/courses', axios.get);
   const { data: tools, error: toolsError } = useSWR('/api/tools', axios.get);
   const { data: recentlyAdded, error: recentlyAddedError } = useSWR('/api/coursesByDate', axios.get);
+  
+  // when done loading, create a user if they don't exist
+  useEffect(() => {
+    if (user) {
+      createUser(user.email, user.name);
+    }
+  }, [user]);
 
   if (isLoading) return <div>Loading...</div>;
   if (error) return <div>{error.message}</div>;
-  
-  
+
   if (!user) {
     router.push('/api/auth/login');
     
   } else if (user) {
-  
+    
     if (coursesError || toolsError || recentlyAddedError) {
       return <div>failed to load courses</div>
     }
@@ -37,13 +70,13 @@ export default function Home() {
             <Backdrop
                 sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
                 open={true}
-            >
+                >
                 <CircularProgress color="inherit" />
             </Backdrop>
         </>
       )
     }
-    
+
     return (
       <>
           <div className={styles.page}>

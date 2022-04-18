@@ -1,6 +1,5 @@
 import { useEffect } from 'react'
 import { useRouter } from 'next/router'
-import Image from 'next/image';
 
 import React from "react";
 import styles from "./styles/Content.module.css";
@@ -54,6 +53,7 @@ export default function Content() {
                                         key={course._id}
                                         title={course.title}
                                         subcategory={course.subcategory}
+                                        category={course.category}
                                         link={course.link}
                                         image={images[Math.floor(Math.random() * images.length)]}
                                     />
